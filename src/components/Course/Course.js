@@ -29,7 +29,7 @@ const Course = (props) => {
                             fullSymbol="fa fa-star fa-2x text-yellow-500 text-sm"
                         />
                     </div>
-                    <p className="ml-auto mr-2"><i class="fas fa-play-circle text-purple-600"></i> {lesson} Classes</p>
+                    <p className="ml-auto mr-2"><i className="fas fa-play-circle text-purple-600"></i> {lesson} Classes</p>
                 </div>
                 {/* button  */}
                 <div className="text-center mt-6">

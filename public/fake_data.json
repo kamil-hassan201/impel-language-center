@@ -2,7 +2,7 @@
     {
         "language": "English For Beginner",
         "cost": 21,
-        "details": "This is a beginner level English Language course. Here we start from scratch so that you can feel at home",
+        "details": "This is a beginner level English Language course. Here we start from scratch so that you can feel at home and enjoy",
         "lesson": 23,
         "rating": 3.1,
         "id": 1,
@@ -11,7 +11,7 @@
     {
         "language": "English For Intermediate",
         "cost": 46,
-        "details": "This is a little bit advanced course. Here we assume that you know a little bit of English",
+        "details": "This is a little bit advanced course. Here we assume that you know a little bit of basics of English",
         "lesson": 25,
         "rating": 4.5,
         "id": 2,
