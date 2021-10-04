@@ -2,7 +2,8 @@ import React from 'react';
 import Rating from 'react-rating';
 
 const Course = (props) => {
-    const { language, details, picture, cost, rating, lesson } = props.course;
+    const { language, details, picture, cost, rating, lesson, id } = props.course;
+    const { handleEnrol } = props;
     return (
         <div className=" p-4 rounded-lg shadow-md hover:shadow-xl">
             {/* Image section  */}
@@ -32,7 +33,7 @@ const Course = (props) => {
                 </div>
                 {/* button  */}
                 <div className="text-center mt-6">
-                    <button className="w-44 h-8 bg-purple-600 text-white rounded-md hover:bg-purple-400"> Enroll Now</button>
+                    <button onClick={() => handleEnrol(id)} className="w-44 h-8 bg-purple-600 text-white rounded-md focus:ring-2 focus:bg-purple-600 hover:bg-purple-400"> Enroll Now</button>
                 </div>
             </div>
         </div>
