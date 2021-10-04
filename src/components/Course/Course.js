@@ -12,7 +12,7 @@ const Course = (props) => {
             </div>
             <div className="mt-4">
                 {/* const & name section  */}
-                <div className="flex my-4 mr-2">
+                <div className="md:flex my-4 mr-2">
                     <h3 className="text-xl font-semibold text-purple-600">${cost}</h3>
                     <h3 className="text-xl ml-auto font-bold">{language}</h3>
                 </div>
