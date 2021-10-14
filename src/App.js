@@ -3,33 +3,40 @@ import './App.css';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Courses from './components/Courses/Courses';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom';
 import Home from './components/Home/Home';
-import Course from './components/Course/Course';
 import About from './components/About/About';
 import MyCourses from './components/MyCourses/MyCourses';
 import NotFound from './components/NotFount/NotFound';
 import React from 'react';
 import useCart from './customHooks/useCart';
 import useCourses from './customHooks/useCourses';
+import Register from './components/Register/Register';
+import Login from './components/Login/Login';
+import AuthProvider from './context/AuthProvider';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import Course from './components/Course/Course';
+import useAuth from './hooks/useAuth';
+import useFirebase from './hooks/useFirebase';
 
-export const CartContext = React.createContext([]);
 
 
 function App() {
-  const [cart, setCart] = useCart();
   const [courses] = useCourses();
+  const [cart, setCart] = useCart();
 
-  // handle ernrol now
   const handleEnrol = (id) => {
     const addedCourse = courses.find(course => course.id === id);
     if (addedCourse) {
       setCart([...cart, addedCourse]);
     }
+
+
   }
+
   return (
     <div>
-      <CartContext.Provider value={cart}>
+      <AuthProvider>
         <BrowserRouter>
           <Header></Header>
           <Switch>
@@ -45,8 +52,14 @@ function App() {
             <Route path="/about">
               <About></About>
             </Route>
-            <Route path="/mycourses">
-              <MyCourses></MyCourses>
+            <PrivateRoute path="/mycourses">
+              <MyCourses cart={cart} ></MyCourses>
+            </PrivateRoute>
+            <Route path="/signin">
+              <Login></Login>
+            </Route>
+            <Route path="/register">
+              <Register></Register>
             </Route>
             <Route path="*">
               <NotFound></NotFound>
@@ -54,7 +67,7 @@ function App() {
           </Switch>
         </BrowserRouter>
         <Footer></Footer>
-      </CartContext.Provider>
+      </AuthProvider>
     </div>
   );
 }

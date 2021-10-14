@@ -2,10 +2,11 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../App';
 import useCart from '../../customHooks/useCart';
+import useAuth from '../../hooks/useAuth';
 import MyCourse from '../MyCourse/MyCourse';
 
-const MyCourses = () => {
-    const cart = useContext(CartContext);
+const MyCourses = (props) => {
+    const { cart } = props;
     return (
         <div className="my-16">
 

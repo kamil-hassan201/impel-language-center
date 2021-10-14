@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import useCourses from '../../customHooks/useCourses';
 import Course from '../Course/Course';
 import img from '../../images/language2.png'
+import useAuth from '../../hooks/useAuth';
+import { AuthContext } from '../../context/AuthProvider';
 
 const Home = (props) => {
     const [courses] = useCourses();
     const { handleEnrol } = props;
+    // const { cart } = useAuth();
+    // console.log(cart);
     const featuredCourses = courses.filter(course => course.rating >= 4);
     return (
         <div className="my-12">
+            {/* <h1>{cart.length}</h1> */}
             <div className="md:flex md:mx-16">
                 <article className="my-auto space-y-6">
                     <h4 className="font-mono text-3xl text-center text-gray-600 ">Welcome to <span className="text-purple-600">Impel Language Center!</span></h4>

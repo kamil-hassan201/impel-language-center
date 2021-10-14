@@ -1,8 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 const Header = () => {
     const [navbarOpen, setNavbarOpen] = React.useState(false);
+    const { user, logOut, auth } = useAuth();
+    const showUser = () => {
+        console.log(user);
+        console.log(auth.currentUser);
+    }
     return (
         <div className="sticky md:w-full top-0">
             <nav className=" relative flex flex-wrap items-center justify-between px-2 py-3 bg-gray-800 mb-3">
@@ -61,6 +67,29 @@ const Header = () => {
                                 >
                                     <span className="ml-2">My Courses</span>
                                 </NavLink>
+                            </li>
+                            {
+                                !user ? <li className="nav-item">
+                                    <NavLink
+                                        className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                                        to="/signin"
+                                    >
+                                        <span className="ml-2">Sign in</span>
+                                    </NavLink>
+                                </li>
+                                    :
+                                    <li>
+                                        <NavLink
+                                            onClick={logOut}
+                                            className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                                            to="/home"
+                                        >
+                                            <span className="ml-2">Sign Out ({user.displayName, user.email})</span>
+                                        </NavLink>
+                                    </li>
+                            }
+                            <li>
+                                <button onClick={showUser}>User</button>
                             </li>
                         </ul>
                     </div>
