@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, updateProfile, signOut, GithubAuthProvider, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, updateProfile, signInWithEmailAndPassword, signOut, GithubAuthProvider, createUserWithEmailAndPassword } from "firebase/auth";
 import firebaseAuthInitializer from "../Firebase/firebase.init"
 import userEvent from "@testing-library/user-event";
 import useCart from "../customHooks/useCart";
@@ -21,9 +21,12 @@ const useFirebase = () => {
     const signinUsingGithub = () => {
         return signInWithPopup(auth, githubprovider);
     }
-    const signinUsingEmail = (email, password) => {
+    const signupUsingEmail = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password)
 
+    }
+    const signinUsingEmail = (email, password) => {
+        return signInWithEmailAndPassword(auth, email, password);
     }
 
     const logOut = () => {
@@ -42,6 +45,7 @@ const useFirebase = () => {
         })
     }, []);
 
+
     return {
         user,
         error,
@@ -50,6 +54,7 @@ const useFirebase = () => {
         logOut,
         setError,
         setUser,
+        signupUsingEmail,
         signinUsingEmail,
         auth
     };

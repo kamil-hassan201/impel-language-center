@@ -5,7 +5,7 @@ import useAuth from '../../hooks/useAuth';
 
 
 const Register = () => {
-    const { signinUsingGithub, signinUsingGoogle, error, user, setUser, setError, signinUsingEmail } = useAuth();
+    const { signinUsingGithub, signinUsingGoogle, error, user, setUser, setError, signupUsingEmail } = useAuth();
     let auth = getAuth();
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
@@ -37,35 +37,36 @@ const Register = () => {
     const handlePassWordChange = (e) => setPassword(e.target.value);
     const handleRePasswordChange = (e) => setRePassword(e.target.value);
     const handleNameChange = (e) => setName(e.target.value);
+
     const setUserName = () => {
-        console.log(auth);
         updateProfile(auth.currentUser, {
-            displayName: "Jane Q. User", photoURL: "https://example.com/jane-q-user/profile.jpg"
+            displayName: name
         }).then(() => {
-            console.log("into function")
+
         }).catch((error) => {
-            console.log(error.message)
+            setError(error.message)
         });
     }
 
     const handleEmailSignUp = () => {
         console.log(email, password, name);
         if (password === rePassword) {
-            signinUsingEmail(email, password)
+            signupUsingEmail(email, password)
                 .then(result => {
-                    history.push(redirect_url);
                     setError("");
+                    setUserName();
+                    history.push(redirect_url);
+
                 })
                 .catch(err => {
                     setError(err.message);
                 })
             // update name 
-            setUserName();
+
         }
         else {
             setError("Password Didn't Match")
         }
-
     }
     return (
         <div>

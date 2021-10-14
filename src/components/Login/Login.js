@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
 const Login = () => {
-    const { signinUsingGithub, signinUsingGoogle, error, user, setUser, setError } = useAuth();
+    const { signinUsingGithub, signinUsingGoogle, error, user, signinUsingEmail, setUser, setError } = useAuth();
     const location = useLocation();
     const history = useHistory();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     const redirect_url = location.state?.from || '/';
 
@@ -24,6 +26,18 @@ const Login = () => {
                 setError(err.message);
             })
     }
+    const handleEmailSignin = () => {
+        signinUsingEmail(email, password)
+            .then(result => {
+                setUser(result.user);
+                setError("");
+                history.push(redirect_url);
+            })
+            .catch(err => {
+                setError(err.message);
+            })
+    }
+
 
     return (
         <div>
@@ -40,21 +54,32 @@ const Login = () => {
                             <p className="text-center mb-6 mt-2 text-gray-600"><small>_____ Or use your email ____</small></p>
                             <p className="text-center mb-6 mt-2 text-red-600"><small>{error}</small></p>
                             <input
+                                onBlur={
+                                    (e) => {
+                                        setEmail(e.target.value)
+                                    }
+                                }
                                 type="text"
                                 className="block border border-gray-400 w-full p-3 rounded mb-4"
                                 name="email"
                                 placeholder="Email" />
 
                             <input
+                                onBlur={
+                                    (e) => {
+                                        setPassword(e.target.value)
+                                    }
+                                }
                                 type="password"
                                 className="block border border-gray-400 w-full p-3 rounded mb-4"
                                 name="password"
                                 placeholder="Password" />
 
                             <button
+                                onClick={handleEmailSignin}
                                 type="submit"
                                 className="w-full text-center py-3 rounded bg-purple-600 text-white hover:bg-green-dark focus:outline-none my-1"
-                            >Create Account</button>
+                            >Sign In</button>
 
                             <div className="text-center text-sm text-grey-dark mt-4">
                                 <div className="text-grey-dark mt-6">

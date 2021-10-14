@@ -84,13 +84,10 @@ const Header = () => {
                                             className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
                                             to="/home"
                                         >
-                                            <span className="ml-2">Sign Out ({user.displayName, user.email})</span>
+                                            <span className="ml-2"><span className="text-red-500">Sign Out</span> ({user.displayName})</span>
                                         </NavLink>
                                     </li>
                             }
-                            <li>
-                                <button onClick={showUser}>User</button>
-                            </li>
                         </ul>
                     </div>
                 </div>
